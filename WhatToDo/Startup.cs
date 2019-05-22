@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace WhatToDo
 {
@@ -26,6 +29,26 @@ namespace WhatToDo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            //Register the Swagger generator
+            services.AddSwaggerGen(c => 
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Title = "WhatToDo API",
+                    Version = "v1",
+                    Description = "API for WhatToDo project",
+                    Contact = new Contact
+                    {
+                        Name = "Vsevolod Parshin",
+                        Email = "seva.parshin@yandex.ru"
+                    }
+                });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +65,15 @@ namespace WhatToDo
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            //Enable Swagger middleware
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "WhatToDo API V1");
+                c.RoutePrefix = string.Empty;
+            });
+
         }
     }
 }
