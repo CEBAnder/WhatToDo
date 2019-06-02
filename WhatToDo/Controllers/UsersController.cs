@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WhatToDo.Models;
+using BCrypt.Net;
 
 namespace WhatToDo.Controllers
 {
@@ -81,6 +82,22 @@ namespace WhatToDo.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Registers new user.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// POST /Users
+        /// {
+        ///   "Login": "johndoe",
+        ///   "Password": "johndoe123",
+        ///   "FirstName": "John",
+        ///   "LastName": "Doe",
+        ///   "CityID": 1
+        /// }
+        /// </remarks>
+        /// <param name="user">User's to create data</param>
+        /// <returns>JWT-token</returns>
         // POST: api/Users
         [HttpPost]
         public async Task<IActionResult> PostUser([FromBody] User user)
@@ -89,6 +106,9 @@ namespace WhatToDo.Controllers
             {
                 return BadRequest(ModelState);
             }
+
+            var passwordHash = BCrypt.Net.BCrypt.HashPassword(user.Password, SaltRevision.Revision2Y);
+            user.Password = passwordHash;
 
             _context.User.Add(user);
             await _context.SaveChangesAsync();

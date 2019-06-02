@@ -99,11 +99,9 @@ namespace WhatToDo.Models
                 entity.Property(e => e.CityId).HasColumnName("CityID");
 
                 entity.Property(e => e.FirstName)
-                    .IsRequired()
                     .HasMaxLength(100);
 
                 entity.Property(e => e.LastName)
-                    .IsRequired()
                     .HasMaxLength(100);
 
                 entity.Property(e => e.Login)
@@ -113,6 +111,8 @@ namespace WhatToDo.Models
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(60);
+
+                entity.Ignore(e => e.JWT);
             });
 
             modelBuilder.Entity<Wishlist>(entity =>
