@@ -5,11 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.EntityFrameworkCore;
-using WhatToDo.Models;
+using akciocore.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
-namespace WhatToDo
+namespace akciocore
 {
     public class Startup
     {
@@ -30,9 +30,9 @@ namespace WhatToDo
             {
                 c.SwaggerDoc("v1", new Info
                 {
-                    Title = "WhatToDo API",
+                    Title = "akciocore API",
                     Version = "v1",
-                    Description = "API for WhatToDo project",
+                    Description = "API for akciocore project",
                     Contact = new Contact
                     {
                         Name = "Vsevolod Parshin",
@@ -82,7 +82,7 @@ namespace WhatToDo
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "WhatToDo API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "akciocore API V1");
                 c.RoutePrefix = string.Empty;
             });
 

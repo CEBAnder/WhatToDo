@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WhatToDo.Models
+namespace akciocore.Models
 {
     public partial class User : UserLogin
     {

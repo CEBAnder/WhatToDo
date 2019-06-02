@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WhatToDo.Models
+namespace akciocore.Models
 {
     public partial class Wishlist
     {

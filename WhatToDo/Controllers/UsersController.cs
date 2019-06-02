@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WhatToDo.Models;
+using akciocore.Models;
 using BCrypt.Net;
 
-namespace WhatToDo.Controllers
+namespace akciocore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

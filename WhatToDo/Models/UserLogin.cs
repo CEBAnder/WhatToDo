@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WhatToDo.Models
+namespace akciocore.Models
 {
     public class UserLogin
     {

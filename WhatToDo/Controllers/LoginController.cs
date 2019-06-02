@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using WhatToDo.Models;
+using akciocore.Models;
 
-namespace WhatToDo.Controllers
+namespace akciocore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
